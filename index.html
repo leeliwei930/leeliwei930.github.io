@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>notes.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="week-2-web-backend%E6%97%A7%E7%94%9F">Week 2 Web Backend(旧生)</h1>
+<h2 id="javascript-selector">JavaScript Selector</h2>
+<hr>
+<ul>
+<li><code>document.querySelector</code>
+<ul>
+<li>Use to select HTML element or tag based on ID or the HTML class name</li>
+<li>Select element based on ID
+<ul>
+<li><code>document.querySelector('#hello')</code></li>
+</ul>
+</li>
+<li>Select element based on class
+<ul>
+<li><code>document.querySelector('.hello')</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>document.getElementById</code>
+<ul>
+<li>Select element only using id (without #)</li>
+<li><code>document.getElementById('el-id')</code></li>
+<li>return single HTML String</li>
+</ul>
+</li>
+<li><code>document.getElementByClassName</code>
+<ul>
+<li>Select element only using className
+<ul>
+<li><code>document.getElementByClassName('className')</code></li>
+<li>return in a collection of HTML syntax</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="use-javascript-update-html-text">Use JavaScript update html / text</h2>
+<h3 id="example-1-using-javascript-set-element-inner-html">Example 1 Using JavaScript set element inner html</h3>
+<p>Update <code>&lt;div id=&quot;content&quot;&gt;</code> child with <code>&lt;h1&gt;Hello World&lt;/h1&gt;</code></p>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"content"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'content'</span>).innerHTML = <span class="hljs-string">"&lt;h1&gt;Hello World&lt;/h1&gt;"</span>
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+
+</div></code></pre>
+<center>-- OR --</center>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"content"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+        <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#content'</span>).innerHTML = <span class="hljs-string">"&lt;h1&gt;Hello World&lt;/h1&gt;"</span>
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+
+</div></code></pre>
+<h3 id="extra-javascript-variable-and-datatype">Extra:  JavaScript Variable and DataType</h3>
+<h4 id="datatype">DataType</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Datatype</th>
+<th style="text-align:center">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Integer</td>
+<td style="text-align:center"><code>1</code></td>
+</tr>
+<tr>
+<td style="text-align:center">Double</td>
+<td style="text-align:center"><code>0.2</code></td>
+</tr>
+<tr>
+<td style="text-align:center">String</td>
+<td style="text-align:center"><code>1</code> or <code>hello</code></td>
+</tr>
+<tr>
+<td style="text-align:center">Array</td>
+<td style="text-align:center">[1,2,3,4] or [&quot;hello&quot; , &quot;world&quot;]</td>
+</tr>
+<tr>
+<td style="text-align:center">Object</td>
+<td style="text-align:center">{name: &quot;David&quot;}</td>
+</tr>
+<tr>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:center">true, false</td>
+</tr>
+</tbody>
+</table>
+<h4 id="declare-variable-and-assign-value">Declare variable and assign value</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> a = <span class="hljs-string">"hello"</span>;
+<span class="hljs-keyword">var</span> b = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">var</span> names = [<span class="hljs-string">"David"</span>, <span class="hljs-string">"Wilson"</span>, <span class="hljs-string">"Clinton"</span>]
+
+</div></code></pre>
+<h4 id="reassign-variable-value">Reassign variable value</h4>
+<pre class="hljs"><code><div><span class="hljs-comment">// continue on previous code</span>
+
+a = <span class="hljs-string">"another Hello"</span>;
+
+</div></code></pre>
+<h3 id="example-2-using-javascript-append-child-html-into-element">Example 2 Using JavaScript append child html into element</h3>
+<p>Append <code>&lt;h1&gt;hello world&lt;/h1&gt;</code> into #content</p>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"content"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+        <span class="hljs-keyword">var</span> targetContent = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'content'</span>);
+        <span class="hljs-keyword">var</span> element = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"H1"</span>);
+        <span class="hljs-keyword">var</span> elementText = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">"hello world"</span>);
+        <span class="hljs-keyword">var</span> text = element.appendChild(elementText);
+        targetContent.appendChild(text);
+        
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+
+</div></code></pre>
+<h3 id="example-3-using-javascript-append-child-text-into-element">Example 3 Using Javascript append child text into element</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"content"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+        <span class="hljs-keyword">var</span> targetContent = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'content'</span>);
+        targetContent.append(<span class="hljs-string">"1"</span>);
+        
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+
+</div></code></pre>
+<h1 id="array-map-and-object">Array, Map and Object</h1>
+<p>Array - use to store a collection of string, item.</p>
+<p>Map - Unique key and value</p>
+<p>Object - An object can contains many attributes, usually use to describe an item such as vehicle, person</p>
+<h2 id="array">Array</h2>
+<h3 id="example-1-create-array">Example 1: Create Array</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> arr = [<span class="hljs-string">"John"</span>, <span class="hljs-string">"Wilson"</span>, <span class="hljs-string">"Brian"</span>];
+</div></code></pre>
+<h3 id="example-2-append-array-item">Example 2 : Append Array item</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> arr = [<span class="hljs-string">"John"</span>, <span class="hljs-string">"Wilson"</span>, <span class="hljs-string">"Brian"</span>];
+arr.push(<span class="hljs-string">"Dennis"</span>);
+</div></code></pre>
+<h3 id="example-3-remove-array-item-start-from-last">Example 3 : Remove array item start from last</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> arr = [<span class="hljs-string">"John"</span>, <span class="hljs-string">"Wilson"</span>, <span class="hljs-string">"Brian"</span>];
+arr.pop()
+</div></code></pre>
+<h3 id="example-4-remove-array-item-start-from-0-index-until-1">Example 4 : Remove array item start from 0 index until 1</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> arr = [<span class="hljs-string">"John"</span>, <span class="hljs-string">"Wilson"</span>, <span class="hljs-string">"Brian"</span>];
+arr.slice(<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);
+</div></code></pre>
+<h2 id="map">Map</h2>
+<h3 id="example-1-create-map">Example 1 : Create Map</h3>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">var</span> map = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>();
+
+</div></code></pre>
+<h3 id="example-2-assign-key-and-value-into-map">Example 2 : Assign key and value into map</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// continue last code</span>
+
+map.set(<span class="hljs-string">"key"</span> , <span class="hljs-string">"value"</span>)
+
+</div></code></pre>
+<h3 id="example-3-read-value-based-on-map-key">Example 3 : Read value based on map key</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">//continue last code</span>
+map.get(<span class="hljs-string">"age"</span>)
+</div></code></pre>
+<h3 id="example-4-delete-item-based-on-key">Example 4 : Delete item based on key</h3>
+<pre class="hljs"><code><div>
+<span class="hljs-comment">//continue last code</span>
+
+map.delete(<span class="hljs-string">"age"</span>)
+
+</div></code></pre>
+<h2 id="object">Object</h2>
+<p>Object usually use to describe a thing like person, item which contains it's own attribute.</p>
+<h3 id="example-1-create-an-object">Example 1 : Create an Object</h3>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">var</span> myself =  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">"John Doe"</span>,
+    <span class="hljs-attr">age</span>: <span class="hljs-number">20</span>,
+    <span class="hljs-attr">hobbies</span>: [<span class="hljs-string">"coding"</span>, <span class="hljs-string">"UI Design"</span> ]
+
+}
+
+</div></code></pre>
+<h3 id="example-2-read-object-attribute">Example 2 : Read Object attribute</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">//continue last code</span>
+
+<span class="hljs-built_in">console</span>.log(myself.name)
+<span class="hljs-comment">// Output : "John Doe"</span>
+
+</div></code></pre>
+<h3 id="example-3-set-object-item">Example 3 : Set Object Item</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">// continue last code</span>
+myself.name = <span class="hljs-string">"John Smith"</span>
+
+</div></code></pre>
+<h1 id="for-loop-and-foreach-loop">For Loop and Foreach Loop</h1>
+<h2 id="for-loop">For Loop</h2>
+<p>For loop basiclly which tells the machine to execute code repeatly until it fulfill the condition</p>
+<h3 id="example-1-count-to-4">Example 1: Count to 4</h3>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">var</span> maxLoop = <span class="hljs-number">4</span>;
+
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> counter = <span class="hljs-number">0</span>; counter &lt;= <span class="hljs-number">4</span>;counter ++){
+    <span class="hljs-built_in">console</span>.log(counter);
+}
+</div></code></pre>
+<h2 id="foreach-loop">Foreach Loop</h2>
+<p>Foreach loop mostly use to display each item from an array normally foreach which known as a method of array.</p>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">var</span> planet = [<span class="hljs-string">"Mars"</span>, <span class="hljs-string">"Venus"</span> , <span class="hljs-string">"Earth"</span> ];
+
+planet.forEach(<span class="hljs-function"><span class="hljs-params">planet</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(planet)
+})
+</div></code></pre>
+<h1 id="select-input-value">Select Input Value</h1>
+<p>It is easy to select html input value to perform arithmetic calculation or store those text into array or value by using <code>document.querySelector</code> .</p>
+<h3 id="example-1-select-an-input-value-from-console">Example 1 : Select an input value from console</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"content"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"msg"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined">
+        
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+
+</div></code></pre>
+<p>Console</p>
+<p>Parse input value to string</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> message = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#msg'</span>).value.toString();
+<span class="hljs-built_in">console</span>.log(message)
+</div></code></pre>
+<h3 id="example-3-doing-some-arithmetic">Example 3 : Doing some arithmetic</h3>
+<p>Be caution, only integer, float or double can perform arithmetic in javascript, if the value is in string. For instances <code>&quot;1&quot;</code> you can use the parsInt() method to convert the string to integer.</p>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"content"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"num1"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"number 1"</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"num2"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"number 2"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined">
+        
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+
+</div></code></pre>
+<p>Console</p>
+<p>Parse input value to string</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> num1 = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#num1'</span>).value;
+<span class="hljs-keyword">var</span> num2 = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'#num2'</span>).value;
+
+num1 = <span class="hljs-built_in">parseInt</span>(num1)
+num2 = <span class="hljs-built_in">parseInt</span>(num2)
+
+<span class="hljs-built_in">console</span>.log(num1 + num2)
+</div></code></pre>
+<h1 id="handling-event-and-method">Handling Event and method</h1>
+<p>Sometimes, we need an event to trigger a methods for instances, when a button is clicked an alert box will prompt out, as we know this is an onclick event that the funtions need to listen on.</p>
+<h3 id="example-1-add-an-onclick-event-listener-into-a-div-and-trigger-a-alert-window">Example 1: Add an onclick event listener into a div, and trigger a alert window</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"cube"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"cube1"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span> Click Me <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+        <span class="hljs-selector-class">.cube</span> {
+            <span class="hljs-attribute">background-color</span>:red;
+            <span class="hljs-attribute">height</span>:<span class="hljs-number">150px</span>;
+            <span class="hljs-attribute">width</span>:<span class="hljs-number">150px</span>;
+        }
+        </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"cube1"</span>).addEventListener(<span class="hljs-string">'click'</span>, () =&gt; {
+            <span class="hljs-built_in">window</span>.alert(<span class="hljs-string">"Hello"</span>);
+        })
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+<h3 id="example-2-handle-an-input-event">Example 2: Handle an input event</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"input-01"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"res"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+        <span class="hljs-selector-class">.cube</span> {
+            <span class="hljs-attribute">background-color</span>:red;
+            <span class="hljs-attribute">height</span>:<span class="hljs-number">150px</span>;
+            <span class="hljs-attribute">width</span>:<span class="hljs-number">150px</span>;
+        }
+        </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"input-01"</span>).addEventListener(<span class="hljs-string">'input'</span>, () =&gt; {
+            <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'res'</span>).text = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"input-01"</span>).value
+        })
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+<h3 id="example-3-handle-a-change-event">Example 3: Handle a change event</h3>
+<p>Change event mostly trigger while an input value change, it could be select, radiobutton, text input or checkbox</p>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"input-01"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"res"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+        <span class="hljs-selector-class">.cube</span> {
+            <span class="hljs-attribute">background-color</span>:red;
+            <span class="hljs-attribute">height</span>:<span class="hljs-number">150px</span>;
+            <span class="hljs-attribute">width</span>:<span class="hljs-number">150px</span>;
+        }
+        </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"input-01"</span>).addEventListener(<span class="hljs-string">'change'</span>, () =&gt; {
+            <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'res'</span>).text = <span class="hljs-string">"Something Changed"</span>
+        })
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+<h1 id="function">Function</h1>
+<p>In programming world, we need to reduce the code redundancy.For instance, we can create a function that use to calculate an average with a sets of data passedin.</p>
+<h2 id="declare-a-function">Declare a function</h2>
+<p>A function which accept array of number for average</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">average</span>(<span class="hljs-params">number</span>)</span>{
+    <span class="hljs-keyword">var</span> numberLength = number.length;
+    <span class="hljs-keyword">var</span> total = <span class="hljs-number">0</span>;
+    number.forEach(<span class="hljs-function"><span class="hljs-params">num</span> =&gt;</span> {
+        total += num;
+    })
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">parseFloat</span>(total / numberLength);
+}
+
+</div></code></pre>
+<h2 id="call-function-when-event-triggered">Call Function When Event Triggered</h2>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"input-01"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"addNumber"</span>&gt;</span>Add Number To Array<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"res"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+        <span class="hljs-selector-class">.cube</span> {
+            <span class="hljs-attribute">background-color</span>:red;
+            <span class="hljs-attribute">height</span>:<span class="hljs-number">150px</span>;
+            <span class="hljs-attribute">width</span>:<span class="hljs-number">150px</span>;
+        }
+        </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+        <span class="hljs-keyword">var</span> numbers = [];
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'addNumber'</span>).addEventListener(<span class="hljs-string">'click'</span>, () =&gt; {
+            <span class="hljs-keyword">var</span> inputNum = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'input-01'</span>).value;
+            numbers.push(<span class="hljs-built_in">parseInt</span>(inputNum));
+            alert(average(numbers))
+        });
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">average</span>(<span class="hljs-params">number</span>)</span>{
+            <span class="hljs-keyword">var</span> numberLength = number.length;
+            <span class="hljs-keyword">var</span> total = <span class="hljs-number">0</span>;
+            number.forEach(<span class="hljs-function"><span class="hljs-params">num</span> =&gt;</span> {
+            total += num;
+            })
+            <span class="hljs-keyword">return</span> <span class="hljs-built_in">parseFloat</span>(total / numberLength);
+        }
+
+        
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+<h1 id="condition">Condition</h1>
+<p>Condition which known as the important part in the software application. A condition usually use to check certain requirement based on user input and return back to user based on different scenario. For instance, if today weather forecast has a 80% chance of rain then I need to bring an umbrella. So that is a condition occured in our real life.</p>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">var</span> chanceOfRain = <span class="hljs-number">80</span>;
+<span class="hljs-keyword">var</span> weatherForecast = <span class="hljs-string">"rain"</span>;
+<span class="hljs-keyword">if</span>(weatherForecast === <span class="hljs-string">"rain"</span> &amp;&amp; chanceOfRain &gt;= <span class="hljs-number">80</span>) {
+    bringUmbrella();
+}
+
+</div></code></pre>
+<p>AND Gate</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">True</th>
+<th style="text-align:center">False</th>
+<th style="text-align:center">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<p>OR Gate</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">True</th>
+<th style="text-align:center">False</th>
+<th style="text-align:center">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-1-writing-an-if-statement">Example 1:  Writing an If Statement</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> condition = <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">if</span>( condition ) {
+    <span class="hljs-comment">// if the condition is true </span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"true"</span>)
+} <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// if the condition is false</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"false"</span>)
+}
+</div></code></pre>
+<h3 id="example-2-compare-value">Example 2 : Compare Value</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> mark = <span class="hljs-number">80</span>;
+<span class="hljs-keyword">if</span>(mark &gt;= <span class="hljs-number">60</span>){
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"You passed the exam"</span>)
+} <span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"You failed the exam"</span>)
+}
+
+</div></code></pre>
+<h3 id="example-3-string-comparison-and-elseif-usage">Example 3 : String comparison and elseif usage</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> grade = <span class="hljs-string">"A"</span>;
+<span class="hljs-keyword">if</span>(grade === <span class="hljs-string">"A"</span>){
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Approx. Mark 80 - 100"</span>)
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (grade ==<span class="hljs-string">"B"</span>){
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Approx. Mark 60 - 79"</span>)
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(grade == <span class="hljs-string">"C"</span>) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Approx. Mark 50 - 59"</span>)
+
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (grade == <span class="hljs-string">"D"</span>) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Approx. Mark 30 - 49"</span>)
+
+}
+</div></code></pre>
+<h3 id="example-4-or-gate-in-if-statement">Example 4 : OR Gate in If Statement</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> booleanA = <span class="hljs-literal">false</span>;
+<span class="hljs-keyword">var</span> booleanB = <span class="hljs-number">50</span> &gt; <span class="hljs-number">2</span>;
+
+<span class="hljs-keyword">if</span>(booleanA || booleanB) {
+   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"condition met"</span>)
+}
+<span class="hljs-comment">//Output condition met</span>
+
+</div></code></pre>
+<h3 id="example-5-and-gate-in-if-statement">Example 5 : AND GATE in If Statement</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> chanceOfRain = <span class="hljs-number">80</span>;
+<span class="hljs-keyword">var</span> weatherForecast = <span class="hljs-string">"rain"</span>;
+<span class="hljs-keyword">if</span>(weatherForecast === <span class="hljs-string">"rain"</span> &amp;&amp; chanceOfRain &gt;= <span class="hljs-number">80</span>) {
+    bringUmbrella();
+}
+</div></code></pre>
+<h2 id="flip-the-condition-with-not">Flip the condition with NOT</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> weatherForecast = <span class="hljs-string">"rain"</span>;
+<span class="hljs-keyword">if</span>(weatherForecast !== <span class="hljs-string">"rain"</span>) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Outdoor activities"</span>)
+} <span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Indoor Activities"</span>)
+}
+
+</div></code></pre>
+<h1 id="welcome-vue">Welcome Vue</h1>
+<p>VueJS is a MVVM software architecture progressive JavaScript framework, which mean you can integrate your vue be a part of your web app.</p>
+<p>View - ViewModel - Model</p>
+<h2 id="create-vue-instances">Create Vue Instances</h2>
+<p>Integrate VueJS into webpage is quite simple, either you can pull in the vue.js library by referencing on a CDN (Content Delivery Network) link in your html head or download the entire vueJS library and include it in your html for offline testing purpose.</p>
+<h3 id="step-1-include-vue-cdn-link-in-your-html-head-section">Step 1 : Include Vue CDN link in your HTML head section</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://unpkg.com/vue"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> 
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+
+</div></code></pre>
+<h3 id="step-2-create-a-div-element-to-allow-vue-attach-on-it">Step 2 : Create A div element to allow Vue attach on it</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://unpkg.com/vue"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> 
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"app"</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined">
+        
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+
+</div></code></pre>
+<h3 id="step-3-create-a-vue-instances-mount-it-in-the-element">Step 3 : Create a vue instances mount it in the element</h3>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://unpkg.com/vue"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> 
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"app"</span>&gt;</span>
+            {{msg}}
+            <span class="hljs-comment">&lt;!-- Print out vue data msg attribute value  --&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="actionscript">
+        <span class="hljs-keyword">const</span> vue = <span class="hljs-keyword">new</span> Vue({
+            el: <span class="hljs-string">"#app"</span>,
+            data: {
+                msg: <span class="hljs-string">"Hello World"</span>
+            },
+            methods: {
+
+            },
+            mounted() {
+                <span class="hljs-comment">// mounted will be called when Vue is mounted on the element</span>
+            }
+        })
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+
+</div></code></pre>
+<h2 id="inside-vue-constructor-parameters">Inside Vue Constructor Parameters</h2>
+<p>Obviously, Vue is coded based on top the OOP (Object Oriented Programming). So when a <code>new vue()</code> is called out, an Vue object is created with it's own attribute such as el which mean element need to mount on and data which is a object contains a sets of data, mounted which is a method will be called out when Vue is mounted on the element.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> vue = <span class="hljs-keyword">new</span> Vue({
+            <span class="hljs-attr">el</span>: <span class="hljs-string">"#app"</span>,
+            <span class="hljs-attr">data</span>: {
+                <span class="hljs-attr">msg</span>: <span class="hljs-string">"Hello World"</span>
+            },
+            <span class="hljs-attr">methods</span>: {
+
+            },
+            mounted() {
+                <span class="hljs-comment">// mounted will be called when Vue is mounted on the element</span>
+            }
+        })
+</div></code></pre>
+<h2 id="the-vuejs-dev-tools">The VueJS Dev Tools</h2>
+<p>VueJS dev tools is a web browser plugin allow developer to interact with vue instances data attribute or debugging code using console.</p>
+<p>VueJS Dev Tools will be available on Google Chrome Webstore</p>
+<h2 id="the-directive">The directive</h2>
+<p><strong>v-model</strong></p>
+<p>v-model usually use to model a data between vue data object and the view, when the value on view (HTML) get updated, at the same time the vue data object will get updated simultaneously.</p>
+<p>The below code indicate when the vue msg data model attribute get updated the span tag text will get updated on the same time.</p>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://unpkg.com/vue"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> 
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"app"</span>&gt;</span>
+            {{msg}}
+            <span class="hljs-comment">&lt;!-- Print out vue data msg attribute value  --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">"msg"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{{msg}}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="actionscript">
+        <span class="hljs-keyword">const</span> vue = <span class="hljs-keyword">new</span> Vue({
+            el: <span class="hljs-string">"#app"</span>,
+            data: {
+                msg: <span class="hljs-string">"Hello World"</span>
+            },
+            methods: {
+
+            },
+            mounted() {
+                <span class="hljs-comment">// mounted will be called when Vue is mounted on the element</span>
+            }
+        })
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+
+</div></code></pre>
+<p><strong>v-for</strong></p>
+<p>v-for directive normally use to render a list it could be an array of item or objects.</p>
+<p>Below code will be rendered out as a list based on the data model names object.</p>
+<pre class="hljs"><code><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+       <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://unpkg.com/vue"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> 
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"app"</span>&gt;</span>
+            {{msg}}
+            <span class="hljs-comment">&lt;!-- Print out vue data msg attribute value  --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">"msg"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">"name in names"</span>&gt;</span>{{name}}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="actionscript">
+        <span class="hljs-keyword">const</span> vue = <span class="hljs-keyword">new</span> Vue({
+            el: <span class="hljs-string">"#app"</span>,
+            data: {
+                names: [
+                    <span class="hljs-string">"Bob"</span>, <span class="hljs-string">"Jonathan"</span>, <span class="hljs-string">"Tim"</span>
+                ]
+            },
+            methods: {
+                
+            },
+            mounted() {
+                <span class="hljs-comment">// mounted will be called when Vue is mounted on the element</span>
+            }
+        })
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+
+</div></code></pre>
+
+</body>
+</html>
