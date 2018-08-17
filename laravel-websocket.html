@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>laravel-websocket.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="laravel-with-websocket-technology">Laravel with Websocket Technology</h1>
+<hr>
+<h2 id="what-is-websocket">What is websocket?</h2>
+<p style="font-size:13pt">Basiclly websocket commonly use to provide a real time feedback data within server and client. For instances, Facebook LIVE features, those comments are submit by viewers and every viewers get all the comments in real time without refresh their entire browser to get the latest comments. Secondly, websockets will be able to provide another user experience on the web such as real time monitoring. For example, users import data from a csv file to the server, and those CSV row data will be batch processing behind the server and the server is able to use the websocket to broadcast the progression back to the user, or notify the user when the progress is done.</p>
+<h2 id="the-socket-service-server">The socket service server</h2>
+<p>Socket service such as Pusher, socket.io that provide developers an easy way to handle websocket without deploying a new socket server and  doing some configuration on the server.</p>
+<h2 id="installation">Installation</h2>
+<hr>
+<h3 id="step-1-create-a-new-pusher-account">Step 1: Create a new Pusher account</h3>
+<p><strong>As the pusher is mentioned aboved, we won't dive into too much about it. So, create a new pusher account and create your new app in the pusher console. Be sure that copy those app key into the .env file.</strong></p>
+<h3 id="step-2-install-the-pusher-official-pusherpusher-php-server-into-your-project-directory-using-composer">Step 2: Install the pusher official <code>pusher/pusher-php-server</code> into your project directory using composer.</h3>
+<pre class="hljs"><code><div>$ composer require pusher/pusher-php-server
+</div></code></pre>
+<h3 id="step-3-install-the-pusher-frontend-javascript-library-using-yarn-or-npm">Step 3: Install the pusher frontend JavaScript Library using yarn or NPM</h3>
+<p><strong>Using Yarn</strong></p>
+<pre class="hljs"><code><div>$ yarn add pusher-js
+</div></code></pre>
+<p><strong>Using NPM</strong></p>
+<pre class="hljs"><code><div>$ npm install pusher-js --save
+</div></code></pre>
+<h3 id="step-4-install-laravel-echo-javascript-libary-using-yarn-or-npm">Step 4: Install <strong>laravel-echo</strong> Javascript Libary using yarn or NPM</h3>
+<p><strong>Using Yarn</strong></p>
+<pre class="hljs"><code><div>$ yarn add laravel-echo
+</div></code></pre>
+<p><strong>Using NPM</strong></p>
+<pre class="hljs"><code><div>$ npm install laravel-echo --save
+</div></code></pre>
+<h2 id="configuration">Configuration</h2>
+<hr>
+<h3 id="enable-broadcastserviceprovider-in-configappphp">Enable <code>BroadcastServiceProvider</code> in <code>config/app.php</code></h3>
+<p>In the services array simply uncomment the BroadcastServiceProvider, out websocket is gonna to use that service, please be sure that BroadcastService Provider is enabled.</p>
+<h3 id="specify-the-pusher-configuration-in-configbroadcastingphp">Specify the Pusher configuration in <code>config/broadcasting.php</code></h3>
+<p>As the <code>.env</code> file handle all the environment variables, and it is ignored by the git repository which mean we can place all pusher app keys in <code>.env</code> file.</p>
+<pre class="hljs"><code><div>PUSHER_APP_ID=&lt;your-pusher-app-id&gt;
+PUSHER_APP_KEY=&lt;your-pusher-app-key&gt;
+PUSHER_APP_SECRET=&lt;your-pusher-app-secreet&gt;
+PUSHER_APP_CLUSTER=&lt;your-pusher-app-cluster&gt;
+
+</div></code></pre>
+<h3 id="extra-configuration-for-cluster-skip-if-you-are-using-laravel-version-55">Extra configuration for cluster [Skip if you are using Laravel version &gt; 5.5]</h3>
+<p>The cluster commonly known as the region for the pusher's socket server. Be sure that choose the closest region between you to prevent any network delay.</p>
+<p>Specify the cluster in the pusher configuratio array</p>
+<p><code>config/broadcasting.php</code></p>
+<pre class="hljs"><code><div><span class="hljs-meta">&lt;?php</span>
+    <span class="hljs-keyword">return</span> [
+        <span class="hljs-string">'connections'</span> =&gt; [
+            <span class="hljs-string">'pusher'</span> =&gt; [
+                    <span class="hljs-string">'driver'</span> =&gt; <span class="hljs-string">'pusher'</span>,
+                    <span class="hljs-string">'key'</span> =&gt; env(<span class="hljs-string">'PUSHER_APP_KEY'</span>),
+                    <span class="hljs-string">'secret'</span> =&gt; env(<span class="hljs-string">'PUSHER_APP_SECRET'</span>),
+                    <span class="hljs-string">'app_id'</span> =&gt; env(<span class="hljs-string">'PUSHER_APP_ID'</span>),
+                    <span class="hljs-comment">// Extra added field </span>
+                    <span class="hljs-string">'options'</span> =&gt; [
+                        <span class="hljs-string">'cluster'</span> =&gt; env(<span class="hljs-string">'PUSHER_APP_CLUSTER'</span>),
+                        <span class="hljs-string">'encrypted'</span> =&gt; <span class="hljs-keyword">true</span>
+                    ]
+            ],
+        ]
+    ];
+</div></code></pre>
+<h3 id="modify-the-broadcast-driver-in-env-of-broadcastingphp">Modify the Broadcast Driver in <code>.env</code> of <code>broadcasting.php</code></h3>
+<pre class="hljs"><code><div>BROADCAST_DRIVER=pusher
+</div></code></pre>
+<h2 id="client-side-javascript-setup">Client side JavaScript setup</h2>
+<hr>
+<h3 id="the-csrf-token-field"><strong>The CSRF-TOKEN field</strong></h3>
+<p>By default if the endpoint API url is declare in the <code>web.php</code> the web middleware will validate all the CSRF token field inside the request headers that sent out front the client side to prevent any cross-site request forgery. To bypass any CSRF validation, you can define your routes inside the <code>api.php</code>, but be sure that the request headers from front end is injected with <strong>X-Requested-With: &quot;XMLHttpRequest&quot;</strong></p>
+<ul>
+<li>Example in axios<pre class="hljs"><code><div><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">'axios'</span>
+axios.defaults.headers.common[<span class="hljs-string">'X-Requested-With'</span>] = <span class="hljs-string">"XMLHttpRequest"</span>
+</div></code></pre>
+</li>
+</ul>
+<h2 id="enable-frontend-pusher-library">Enable frontend pusher library</h2>
+<p>Inside your <code>resources/assets/js/bootstrap.js</code> uncomment these lines of code, to import pusher library and laravel-echo in you JavaScript file.</p>
+<ul>
+<li><code>bootstrap.js</code><pre class="hljs"><code><div><span class="hljs-keyword">import</span> Echo <span class="hljs-keyword">from</span> <span class="hljs-string">'laravel-echo'</span>;
+
+<span class="hljs-built_in">window</span>.Pusher = <span class="hljs-built_in">require</span>(<span class="hljs-string">'pusher-js'</span>)
+<span class="hljs-built_in">window</span>.Echo = <span class="hljs-keyword">new</span> Echo({
+    <span class="hljs-attr">broadcaster</span>: <span class="hljs-string">'pusher'</span>,
+    <span class="hljs-attr">key</span>: <span class="hljs-string">'your-pusher-key'</span>,
+
+    <span class="hljs-comment">// asia-pacific-singapore</span>
+    cluster:<span class="hljs-string">'ap1'</span>,
+    encrypted： <span class="hljs-literal">true</span>
+})
+
+</div></code></pre>
+</li>
+</ul>
+<h2 id="real-time-comment-system-development">Real-time comment system development</h2>
+<hr>
+<blockquote>
+<h3 id="step-1-create-comment-database-model-and-migration">Step 1: Create Comment database model and migration</h3>
+</blockquote>
+<pre class="hljs"><code><div>    $ php artisan make:model Comment -mc
+</div></code></pre>
+<p>**The <code>-mc</code> flags which also create a migration and a controller file.</p>
+<blockquote>
+<h3 id="step-2-the-writing-the-migration-scripts">Step 2: The writing the migration scripts</h3>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-meta">&lt;?php</span>
+...
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CreateCommentsTable</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Migrations</span> </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">up</span><span class="hljs-params">()</span></span>{
+        Schema::create(<span class="hljs-string">'comments'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($table Blueprint)</span></span>{
+            $table-&gt;increments(<span class="hljs-string">'id'</span>);
+            $table-&gt;integer(<span class="hljs-string">'user_id'</span>)-&gt;unsigned();
+            $table-&gt;integer(<span class="hljs-string">'post_id'</span>)-&gt;unsigned();
+            $table-&gt;text(<span class="hljs-string">'comment_body'</span>);
+            $table-&gt;timestamps();
+
+            $table-&gt;foreign(<span class="hljs-string">'user_id'</span>)-&gt;references(<span class="hljs-string">'id'</span>)-&gt;on(<span class="hljs-string">'users'</span>)-&gt;onDelete(<span class="hljs-string">'cascade'</span>);
+            $table-&gt;foreign(<span class="hljs-string">'post_id'</span>)-&gt;references(<span class="hljs-string">'id'</span>)-&gt;on(<span class="hljs-string">'posts'</span>)-&gt;onDelete(<span class="hljs-string">'cascade'</span>);
+        })
+    }
+
+    publc <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drop</span><span class="hljs-params">()</span></span>{
+        Schema::dropIfExists(<span class="hljs-string">'comments'</span>);
+    }
+}
+
+&gt;
+</div></code></pre>
+<blockquote>
+<h3 id="step-3-declare-mass-assignable-fields-and-define-model-relationships">Step 3: Declare mass assignable fields and define model relationships</h3>
+</blockquote>
+<blockquote>
+<p><code>app\Comment.php</code></p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Comment</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span> </span>{
+    <span class="hljs-keyword">protected</span> $fillable = [<span class="hljs-string">'comment_body'</span> , <span class="hljs-string">'user_id'</span>];
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">post</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;belongsTo(\App\Post::class);
+
+    }
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">user</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;belongsTo(\App\User::class);
+        
+    }
+}
+
+</div></code></pre>
+<blockquote>
+<p><code>app\Post.php</code></p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Post</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span> </span>{
+    ...
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">comments</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;hasMany(\App\Comment::class);
+
+    }
+}
+</div></code></pre>
+<blockquote>
+<p><code>app\User.php</code></p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Authenticatable</span> </span>{
+    ...
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">comments</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;hasMany(\App\Comment::class);
+
+    }
+}
+</div></code></pre>
+<blockquote>
+<h2 id="declaring-api-endpoint-url-in-apiphp">Declaring API endpoint url in api.php</h2>
+</blockquote>
+<blockquote>
+<p><code>routes/api.php</code></p>
+</blockquote>
+<pre class="hljs"><code><div>Route::get(<span class="hljs-string">'posts/{post}/comments'</span>, <span class="hljs-string">"CommentController@index"</span>);
+
+Route::middleware(<span class="hljs-string">'auth:api'</span>)-&gt;group(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+    Route::post(<span class="hljs-string">'posts/{post}/comment'</span>, <span class="hljs-string">"CommentController@store"</span>);
+})
+</div></code></pre>
+<blockquote>
+<h2 id="define-methods-in-comment-controller">Define methods in comment controller</h2>
+</blockquote>
+<p><strong>Create New Controller</strong></p>
+<pre class="hljs"><code><div>php artisan make:controlleer CommentController
+</div></code></pre>
+<pre class="hljs"><code><div>...
+<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Request</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Post</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Comment</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Auth</span>;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CommentController</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Controller</span> </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">index</span><span class="hljs-params">(Post $post)</span></span>{
+        <span class="hljs-keyword">return</span> response()-&gt;json($post-&gt;comments()-&gt;with(<span class="hljs-string">'user'</span>)-&gt;latest()-&gt;get());
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">store</span><span class="hljs-params">(Request $request, Post $post)</span></span>{
+        $comment = $post-&gt;comments()-&gt;create([<span class="hljs-string">'comment_body'</span> =&gt; $request-&gt;comment_body , <span class="hljs-string">'user_id'</span> =&gt; auth()-&gt;id
+        ]);
+        
+        $comment = Comment::where(<span class="hljs-string">'id'</span> , $comment-&gt;id)-&gt;with(<span class="hljs-string">'user'</span>)-&gt;first();
+        <span class="hljs-keyword">return</span> response()-&gt;json($comment);
+    }
+}
+
+</div></code></pre>
+<blockquote>
+<h2 id="front-end-ui-development">Front-end UI development</h2>
+</blockquote>
+<blockquote>
+<p><code>resources/views/post.blade.php</code></p>
+</blockquote>
+<pre class="hljs"><code><div>
+@extends('layouts.master')
+@section('content')
+
+@endsection
+
+@section('scripts')
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Vue({
+    <span class="hljs-attr">el</span> : <span class="hljs-string">"#app"</span>,
+    <span class="hljs-attr">data</span>: {
+        <span class="hljs-attr">comments</span>: {
+
+        },
+        <span class="hljs-attr">commentBox</span>: <span class="hljs-string">''</span>,
+        <span class="hljs-attr">post</span>: {{!! $post-&gt;toJson() !!}},
+        <span class="hljs-attr">user</span>: {!!Auth::check() ? Auth::user()-&gt;toJson() : <span class="hljs-string">'null'</span> !!}
+    },
+    mounted() {
+        <span class="hljs-keyword">this</span>.getComments();
+    },
+    <span class="hljs-attr">methods</span>: {
+        getComments(){
+            axios.get(<span class="hljs-string">'/api/posts/'</span> + <span class="hljs-keyword">this</span>.post.id + <span class="hljs-string">'/comments'</span>).then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> {
+              <span class="hljs-keyword">this</span>.comments = response.data;  
+            }).catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+                <span class="hljs-built_in">console</span>.log(error)
+            })
+        },
+        postComments(){
+            axios.post(<span class="hljs-string">'/api/posts/'</span> + <span class="hljs-keyword">this</span>.post.id + <span class="hljs-string">'/comment'</span>, {
+                <span class="hljs-attr">api_token</span>: <span class="hljs-keyword">this</span>.user.api_token,
+                <span class="hljs-attr">comment_body</span>: <span class="hljs-keyword">this</span>.commentBox
+            }).then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> {
+                <span class="hljs-keyword">this</span>.comments.unshift(response.data);
+                <span class="hljs-keyword">this</span>.commentBox = <span class="hljs-string">""</span>;
+
+            }).catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+                <span class="hljs-built_in">console</span>.log(error)
+            })
+        }
+    }
+})
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+@endsection
+</div></code></pre>
+<blockquote>
+<h2 id="rendering-comments-lists">Rendering comments lists</h2>
+</blockquote>
+<pre class="hljs"><code><div>    .media.mt-2(v-for=&quot;comment in comments&quot;)
+        .media-left
+            a(href=&quot;#&quot;)
+                img.media-object(src=&quot;http://placeimg.com/80/80&quot;)
+        .media-body
+            h4.media-heading @{{comment.user.name}} said...
+            p @{{comment.comment_body}}
+            span(style=&quot;color:white&quot;) @{{comment.date}}
+</div></code></pre>
+<blockquote>
+<h2 id="save-comment-button">Save Comment Button</h2>
+</blockquote>
+<pre class="hljs"><code><div>    button.btn.btn-primary(v-on:click=&quot;postComment&quot;) Comment
+</div></code></pre>
+<blockquote>
+<h2 id="handling-websockets">Handling Websockets</h2>
+</blockquote>
+<h3 id="step-1-create-a-new-event-and-named-it-as-newcomment">Step 1: Create a new event and named it as NewComment</h3>
+<pre class="hljs"><code><div>php artisan make:event NewComment
+</div></code></pre>
+<h4 id="implements-shouldbroadcast-interface-into-newcomment-event-class">Implements ShouldBroadcast interface into NewComment event class</h4>
+<pre class="hljs"><code><div><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>\<span class="hljs-title">Events</span>;
+
+<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Broadcasting</span>\<span class="hljs-title">Channel</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Queue</span>\<span class="hljs-title">SerializesModels</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Brodcasting</span>\<span class="hljs-title">PrivateChannel</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Broadcasting</span>\<span class="hljs-title">PresenceChannel</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Foundation</span>\<span class="hljs-title">Events</span>\<span class="hljs-title">Dispatchable</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Broadcasting</span>\<span class="hljs-title">InteractsWithSockets</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Contracts</span>\<span class="hljs-title">Broadcasting</span>\<span class="hljs-title">ShoudBroadcast</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Contracts</span>\<span class="hljs-title">Broadcasting</span>\<span class="hljs-title">ShoudBroadcastNow</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NewComment</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ShouldBroadcastNow</span> </span>{
+
+    <span class="hljs-keyword">use</span> <span class="hljs-title">Dispatchable</span>, <span class="hljs-title">InteractWithSockets</span>, <span class="hljs-title">SerializesModels</span>;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">()</span></span>{
+        
+    }
+}
+
+
+</div></code></pre>
+<blockquote>
+<h3 id="warning-shouldbroadcastnow-interfaces-will-not-queue-the-job-it-will-execute-the-handler-immediately-when-an-event-occured-if-the-is-in-production-please-use-shouldbroadcast-instead-of-shouldbroadcastnow-interface">Warning : <strong>ShouldBroadcastNow interfaces will not queue the job, it will execute the handler immediately when an event occured, if the is in production please use ShouldBroadcast instead of ShouldBroadcastNow interface.</strong></h3>
+</blockquote>
+<h3 id="channel-type">Channel Type</h3>
+<p>There are different channel class  such as Cannel, PrivateChannel and PresenceChannel each channel has it's different specification that is showed below the table</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Channel Type</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Channel</strong></td>
+<td style="text-align:left">Known as public channel anyone is able to keep listen on the channel event on the frontend</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>PrivateChannel</strong></td>
+<td style="text-align:left">Only authenticated user are able to listen on the channel event</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>PresenceChannel</strong></td>
+<td style="text-align:left">Advance version of the PrivateChannel, such as specify channel for different authenticated user roles</td>
+</tr>
+</tbody>
+</table>
+<h4 id="the-broadcaston-methods-and-constructor">The <code>broadcastOn</code> methods and constructor</h4>
+<p>The broadcastOn methods let you specify which channel that you are going to use, and specify the channel name.</p>
+<p>The constructor methods let you passed those data payload that can be attached with the broadcast channel. In this scenario, we need to pass in the post data as our payload.</p>
+<p>The broadcastWith nethods let your perform some modification for the data that passed into the websocket server (Pusher). Since the channel we use is a public channel, passing all user's secret information such as api_token into the sockets data payload may result a potential security risk in data leak.</p>
+<pre class="hljs"><code><div>...
+<span class="hljs-keyword">protected</span> $comment;
+<span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span><span class="hljs-params">(Comment $comment)</span> </span>{
+    <span class="hljs-keyword">$this</span>-&gt;comment = $comment;
+}
+<span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">broadcastOn</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Channel(<span class="hljs-string">'postComment-'</span>.<span class="hljs-keyword">$this</span>-&gt;comment-&gt;post-&gt;id);
+    <span class="hljs-comment">//Anyone can use this channel</span>
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">broadcastWith</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">return</span> [
+        <span class="hljs-string">'body'</span> =&gt; <span class="hljs-keyword">$this</span>-&gt;comment-&gt;comment_body,
+        <span class="hljs-string">'created_at'</span> =&gt; <span class="hljs-keyword">$this</span>-&gt;comment-&gt;created_at-&gt;toFormattedDateString(),
+        <span class="hljs-string">'user'</span>  =&gt;[
+            <span class="hljs-string">'name'</span> =&gt; <span class="hljs-keyword">$this</span>-&gt;comment-&gt;user-&gt;name,
+            <span class="hljs-string">'avatars'</span> =&gt; <span class="hljs-keyword">$this</span>-&gt;comment-&gt;user-&gt;avatars
+        ]
+    ]
+}
+
+</div></code></pre>
+<blockquote>
+<h3 id="trigger-the-event">Trigger the event</h3>
+</blockquote>
+<p>As we have setup the event, it's time to trigger the event. To trigger the event we need to trigger it inside the CommentController store methods.</p>
+<pre class="hljs"><code><div>...
+<span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Request</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Post</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Comment</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Auth</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">App</span>\<span class="hljs-title">Events</span>\<span class="hljs-title">NewComment</span>;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CommentController</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Controller</span> </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">index</span><span class="hljs-params">(Post $post)</span></span>{
+        <span class="hljs-keyword">return</span> response()-&gt;json($post-&gt;comments()-&gt;with(<span class="hljs-string">'user'</span>)-&gt;latest()-&gt;get());
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">store</span><span class="hljs-params">(Request $request, Post $post)</span></span>{
+        $comment = $post-&gt;comments()-&gt;create([<span class="hljs-string">'comment_body'</span> =&gt; $request-&gt;comment_body , <span class="hljs-string">'user_id'</span> =&gt; auth()-&gt;id
+        ]);
+        
+        $comment = Comment::where(<span class="hljs-string">'id'</span> , $comment-&gt;id)-&gt;with(<span class="hljs-string">'user'</span>)-&gt;first();
+
+        <span class="hljs-comment">// broadcast to others people.</span>
+        broadcast(<span class="hljs-keyword">new</span> NewComment($comment))-&gt;toOthers();
+
+        <span class="hljs-keyword">return</span> response()-&gt;json($comment);
+    }
+}
+
+</div></code></pre>
+<blockquote>
+<h3 id="subscribe-channel-on-frontend">Subscribe Channel On Frontend</h3>
+</blockquote>
+<p>On frontend, we should tell Laravel Echo subscribe the channel which is postComment-:post_id channel. When a new incoming events come in, we should update the comment list.</p>
+<p>Secondly, we should declare a new listen method inside the methods object which keep tracking on incoming channel event.</p>
+<pre class="hljs"><code><div>
+...
+
+methods: {
+    ...,
+    listen(){
+        Echo.channel(<span class="hljs-string">'postComment-'</span> + <span class="hljs-keyword">this</span>.post.id).listen(<span class="hljs-string">'NewComment'</span>, (comment) =&gt; {
+
+            <span class="hljs-keyword">this</span>.comments.unshift(comment);
+        })
+    }
+},
+mounted() {
+    <span class="hljs-comment">// Keep listening on channel when the vue component is mounted.</span>
+    <span class="hljs-keyword">this</span>.listen();
+}
+
+...
+
+</div></code></pre>
+<h2 id="the-presence-and-private-channel">The Presence and Private Channel</h2>
+<blockquote>
+<h3 id="private-channel">Private Channel</h3>
+</blockquote>
+<p>Switch public channel to private channel</p>
+<p>On Frontend changed to Echo.channel to Echo.private to tell Laravel Echo the current listen channel required an authentication.</p>
+<blockquote>
+<p>Frontend</p>
+</blockquote>
+<pre class="hljs"><code><div>
+...
+methods : {
+    listen() {
+        Echo.private(<span class="hljs-string">'postComment-'</span> +<span class="hljs-keyword">this</span>.post.id).listen(<span class="hljs-string">'NewComment'</span>, (comment) =&gt; {
+            <span class="hljs-built_in">console</span>.log(comment);
+        })
+    }
+}
+</div></code></pre>
+<blockquote>
+<p>Backend</p>
+</blockquote>
+<p><code>app\Events\NewComment.php</code></p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NewComment</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Event</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ShouldBroadcastNow</span> </span>{
+    ...
+
+    <span class="hljs-keyword">public</span> broadcastedOn(){
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> PrivateChannel(<span class="hljs-string">'postComment-'</span>.<span class="hljs-keyword">$this</span>-&gt;comment-&gt;post-&gt;id);
+    }
+}
+</div></code></pre>
+<p><code>routes/channels.php</code></p>
+<p>The <code>channels.php</code> which allow developers to provide some channel subscribed authorization policy.</p>
+<pre class="hljs"><code><div>Broadcast::channel(<span class="hljs-string">'App.User.{id}'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($user, $id)</span></span>{
+    <span class="hljs-comment">// The code below shown the current user which passed in the first parameters and the second paremeters channel user id field. With this two parameters we can use comparison to check whether the current log in user has the rights to subscribe on the channel.</span>
+
+    <span class="hljs-keyword">return</span> (int) $user-&gt;id === (int) $id;
+});
+
+Broadcast::channel(<span class="hljs-string">'postComment-{id}'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($user, $id)</span></span>{
+    <span class="hljs-comment">// If user logged in, the first parameters with user information will be passed in, and the code will be executed and return an authorized boolean which is true to current logged in user.</span>
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+});
+
+</div></code></pre>
+
+</body>
+</html>
