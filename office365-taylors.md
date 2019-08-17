@@ -1,8 +1,9 @@
 ## Getting Started/Office 365/Obtain Education Email Address
 ***
-> **Things Required before continue the following action**
->    - An eligble taylors student id
->    - taylors moodle (TIMeS account) password
+**Things Required before continue the following action**
+
+- [x] An eligble taylors student id
+- [x] taylors moodle (TIMeS account) password
 
 
 ### **Obtain student email**
