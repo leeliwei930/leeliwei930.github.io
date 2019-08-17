@@ -27,7 +27,8 @@ Once you get your student email, it's time to headover to office 365 to download
   - password: Se`<your-ic-number-without-dashes>`
 
 > If you are first-time login user, office 365 will prompt you a password reset, as well as input alternate email address for quick account recovery. Your secondary email adress could be your own personal email adress such as Gmail, Hotmail, YahooMail etc.   
-> Once password changed, please remember it you will use it to sign in into Office 365 application.
+Once password changed, please remember it you will use it to sign in into Office 365 application.
+
 - Step 2
   - Once you are logged in, click on the `Install Office` button
 
