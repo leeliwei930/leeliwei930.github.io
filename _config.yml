@@ -1,6 +1,7 @@
 theme: jekyll-theme-slate
 include:
-  - office365-taylors.md
-  - *.md
+- office365-taylors.md
+- 2024_christmas/85cf0a0e44c5a77ad228647ccf583c3c3b80874637e408a578c2e0d06b14a275.md
+- 2024_christmas//Users/leeliwei.fazz/Developer/leeliwei930.github.io/2024_christmas/87e3e9c731fdafbb28bd5324b8188d74f4b15ea5ff97b98233d2c1a38f804d72.md
 title: Li Wei's GitHub Page
 description: Basic Quick Markdown note sharing zone
